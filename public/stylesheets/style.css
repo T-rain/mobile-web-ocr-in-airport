@@ -1,0 +1,53 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+img {
+     height: auto;
+     max-width: 100%;
+ }
+
+video {
+     height: auto;
+     max-width: 100%;
+ }
+
+
+ canvas{
+     height: auto;
+     max-width: 100%;
+
+ }
+
+
+
+/*
+
+ @media only screen and (max-width: 768px) {
+      // Media Query ，也就是當寬度 < 768 px 時將載入下面這段 CSS :
+     //CSS的內容
+
+}
+
+ @media only screen and (max-width: 480px) {
+     // Media Query ，也就是當寬度 < 480 px 時將載入下面這段 CSS :
+     //CSS的內容
+}
+
+ @media only screen and (max-width: 320px) {
+      // Media Query ，也就是當寬度 < 320 px 時將載入下面這段 CSS :
+     //CSS的內容
+
+}
+
+
+*/
+
+
+
+
