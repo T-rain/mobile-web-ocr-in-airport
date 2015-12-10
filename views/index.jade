@@ -7,15 +7,9 @@ html.
       <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     </head>
     <body>
-      <!--
-      Ideally these elements aren't created until it's confirmed that the 
-      client supports video/camera, but for the sake of illustrating the 
-      elements involved, they are created with markup (not JavaScript)
-      -->
     <video id="video" autoplay></video>
     <button id="snap">Take a picture</button>
     <canvas id="canvas"></canvas>
-    <!-- <img id="canvasImg" alt="Right click to save me!"> -->
     <button id="ocr">OCR</button>
     
     <script>
@@ -47,59 +41,6 @@ html.
           var errBack = function(error) {
             console.log("Video capture error: ", error.code); 
           };
-
-          // new method,navigator.mediaDevices
-          /*
-          navigator.mediaDevices = navigator.mediaDevices || ((navigator.mozGetUserMedia || navigator.webkitGetUserMedia) ? {
-               getUserMedia: function(c) {
-                 return new Promise(function(y, n) {
-                   (navigator.mozGetUserMedia ||
-                    navigator.webkitGetUserMedia).call(navigator, c, y, n);
-                 });
-               }
-          } : null);
-          
-
-          var Video = function(){
-              navigator.mediaDevices.getUserMedia(videoSetup).then(function(stream) {
-              
-                var video = document.getElementById('video');
-                video.src = window.URL.createObjectURL(stream);
-                video.onloadedmetadata = function(e) {
-
-                  video.play();
-                    };
-                })
-                .catch(function(err) {
-                    console.log(err.name + ": " + err.message);
-              });
-
-          };
-          
-          if(navigator.mozGetUserMedia || navigator.webkitGetUserMedia){
-                navigator.mediaDevices.getUserMedia = function(c) {
-                   return new Promise(function(y, n) {
-                     (navigator.mozGetUserMedia ||
-                      navigator.webkitGetUserMedia).call(navigator, c, y, n);
-                   });
-                };
-
-                Video();
-
-              }else{
-                console.log("getUserMedia() not supported.");
-                alert("getUserMedia() not supported.");
-              }
-          }else{
-
-              Video();
-          }
-
-
- 
-
-          }
-          */
         
           
           // Old method,navigator.getUserMedia
@@ -136,8 +77,7 @@ html.
                 url: "/",
                 data: {"dataURI":dataURI},
                 dataType: 'json',
-                //processData: false,
-                //contentType: false,
+                
                 error: function(xhr) {
                     console.log(xhr);
                     alert('發生錯誤');
@@ -145,32 +85,18 @@ html.
                 success: function(response) {
                     console.log(response);
                     alert('拍照成功');
-                    //window.location.replace("/users");
                 }
               });
 
-              //document.getElementById('canvasImg').src = dataURL;
-              //console.log(dataURL);
 
           });
 
           document.getElementById("ocr").addEventListener("click", function() {
-              //"https://ocr.a9t9.com/api/Parse/Image",
-              /*   
-              var blobBin = window.atob(dataURI);
-              var array = [];
-              for(var i = 0; i < blobBin.length; i++) {
-                  array.push(blobBin.charCodeAt(i));
-              }
-              var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
-              */
-
-              //http://www.bitocr.com/api
-
+              
               var r = confirm("Ocr??");
               if (r === true) {
                   alert("Strat,please wait");
-                  //window.location.replace("/ocrs");
+                
               } else {
                   alert("No Ocr");
               }
@@ -180,55 +106,6 @@ html.
               
   
           });
-
-              /*
-              var path = "https://ocr.a9t9.com/api/Parse/Image",
-                  params = {"q:":"a"},
-                  method = "POST";
-
-              method = method || "post"; // Set method to post by default, if not specified.
-
-              // The rest of this code assumes you are not using a library.
-              // It can be made less wordy if you use one.
-              var blob = dataURItoBlob(dataURI);
-
-              var form = document.createElement("form");
-
-              form.setAttribute("enctype","multipart/form-data");
-              form.setAttribute("method", method);
-              form.setAttribute("action", path);
-              //var decodedData = window.atob(dataURL);
-
-              for(var key in params) {
-                  
-                  var fileinput = document.createElement("input");
-                  fileinput.setAttribute("type", "hidden");
-                  fileinput.setAttribute("name", "file");
-                  fileinput.setAttribute("value", decodedData);
-                  form.appendChild(fileinput);
-                  
-
-                  var languageinput = document.createElement("input");
-                  languageinput.setAttribute("type", "hidden");
-                  languageinput.setAttribute("name", "language");
-                  languageinput.setAttribute("value", "eng");
-                  form.appendChild(languageinput);
-
-                  var apikeyinput = document.createElement("input");
-                  apikeyinput.setAttribute("type", "hidden");
-                  apikeyinput.setAttribute("name", "apikey");
-                  apikeyinput.setAttribute("value", "helloworld");
-                  form.appendChild(apikeyinput);
-              }
-
-              form.append("file", blob);
-
-              document.body.appendChild(form);    // Not entirely sure if this is necessary
-              form.submit();
-              */
-
-
-
 
       }, false);
 
