@@ -32,16 +32,24 @@ router.get('/', function(req, res, next) {
     }
     */
   };
+  /*
+  console.log('Upload successful!  Server responded with:', formData);
+  formData.txt = 'Upload successful!  Server responded with:';
+  res.json(formData);
+  */
+  
   request.post({url:'http://www.bitocr.com/api', formData: formData}, function optionalCallback(err, httpResponse, body) {
     if (err) {
       return console.error('upload failed:', err);
     }else{
+      
       console.log('Upload successful!  Server responded with:', body);
-      res.json(httpResponse);
+      res.json(body);
 
     }
 
   });
+  
 
   //res.render('ocr', { title: 'OCR' });
 });

@@ -140,11 +140,11 @@ html.
                 //contentType: false,
                 error: function(xhr) {
                     console.log(xhr);
-                    alert('Ajax request 發生錯誤1');
+                    alert('發生錯誤');
                 },
                 success: function(response) {
                     console.log(response);
-                    alert('ajax成功1');
+                    alert('拍照成功');
                     //window.location.replace("/users");
                 }
               });
@@ -170,7 +170,7 @@ html.
               var r = confirm("Ocr??");
               if (r === true) {
                   alert("Strat,please wait");
-                  window.location.replace("/ocrs");
+                  //window.location.replace("/ocrs");
               } else {
                   alert("No Ocr");
               }
