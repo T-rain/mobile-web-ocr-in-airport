@@ -15,36 +15,45 @@ router.get('/', function(req, res, next) {
 
     file: fs.createReadStream('./tmp/tmp.png'),
     // Pass multiple values /w an Array
-    /*
-    attachments: [
-      fs.createReadStream(__dirname + '/attachment1.jpg'),
-      fs.createReadStream(__dirname + '/attachment2.jpg')
-    ],
+    
+    // attachments: [
+    //  fs.createReadStream(__dirname + '/attachment1.jpg'),
+    //  fs.createReadStream(__dirname + '/attachment2.jpg')
+    // ],
     // Pass optional meta-data with an 'options' object with style: {value: DATA, options: OPTIONS}
     // Use case: for some types of streams, you'll need to provide "file"-related information manually.
     // See the `form-data` README for more information about options: https://github.com/form-data/form-data
-    custom_file: {
-      value:  fs.createReadStream('/dev/urandom'),
-      options: {
-        filename: 'topsecret.jpg',
-        contentType: 'image/jpg'
-      }
-    }
-    */
+    // custom_file: {
+    //  value:  fs.createReadStream('/dev/urandom'),
+    //  options: {
+    //    filename: 'topsecret.jpg',
+    //    contentType: 'image/jpg'
+    //  }
+    // }
+    
   };
-  /*
-  console.log('Upload successful!  Server responded with:', formData);
-  formData.txt = 'Upload successful!  Server responded with:';
-  res.json(formData);
-  */
+  
+  //console.log('Upload successful!  Server responded with:', formData);
+  //formData.txt = 'Upload successful!  Server responded with:';
+  //res.json(formData);
+  
   
   request.post({url:'http://www.bitocr.com/api', formData: formData}, function optionalCallback(err, httpResponse, body) {
     if (err) {
       return console.error('upload failed:', err);
     }else{
       
-      console.log('Upload successful!  Server responded with:', body);
-      res.json(body);
+      
+      if(body.error !== 0){
+        console.log('Oops,cannot find word:', body);
+        res.render('ocrerror', { title: 'OcrError' });
+
+      }else{
+        console.log('Upload successful!  Server responded with:', body);
+        res.json(body);
+
+      }
+      
 
     }
 
@@ -52,6 +61,10 @@ router.get('/', function(req, res, next) {
   
 
   //res.render('ocr', { title: 'OCR' });
+
+
+
+
 });
 
 
