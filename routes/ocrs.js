@@ -32,7 +32,16 @@ router.get('/', function(req, res, next) {
     // }
     
   };
+  /*
+  var body = {"error":0,"result":"FROM: HONG KONG\/HKG\nT0: TAIPEI\/TPE","filename":"tmp.png","language":"eng","width":257,"height":65};
   
+      console.log(body.error);
+      console.log(typeof(body));
+      console.log(Array.isArray(body));
+      console.log(JSON.stringify(body));
+      console.log(body);
+      console.log(body.error);
+  */
   //console.log('Upload successful!  Server responded with:', formData);
   //formData.txt = 'Upload successful!  Server responded with:';
   //res.json(formData);
@@ -42,22 +51,34 @@ router.get('/', function(req, res, next) {
     if (err) {
       return console.error('upload failed:', err);
     }else{
-      
-      
-      if(body.error !== 0){
-        console.log('Oops,cannot find word:', body);
-        res.render('ocrerror', { title: 'OcrError' });
+      try{
+        var ocrdata = JSON.parse(body);
+        console.log(typeof(ocrdata));
+        console.log(Array.isArray(ocrdata));
+        console.log(ocrdata);
+        console.log(ocrdata.error);
+        if(ocrdata.error !== 0){
+          console.log('Oops,cannot find word:', ocrdata);
+          res.render('ocrerror', { title: 'OcrError' });
 
-      }else{
-        console.log('Upload successful!  Server responded with:', body);
-        res.json(body);
+        }else{
+          console.log('Upload successful!  Server responded with:', ocrdata);
+          res.json(ocrdata);
 
+        }
+
+
+      }catch(error){
+        return console.error('upload failed error:', error);
       }
+
       
 
     }
 
   });
+
+
   
 
   //res.render('ocr', { title: 'OCR' });

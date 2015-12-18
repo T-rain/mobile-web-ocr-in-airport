@@ -1,5 +1,13 @@
+html{
+      height: 100%;
+      width: 100%;
+}
+
 body {
-  padding: 50px;
+  display: flex;
+  width:100%;
+  height: 100%;
+  /*padding: 50px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,46 +15,92 @@ a {
   color: #00B7FF;
 }
 
-img {
-     height: auto;
-     max-width: 100%;
- }
+.container {
+        width:100%;
+        height: 100%;
+        display: -webkit-flex;
+        display:         flex;
+        
+        -webkit-align-items: center;
+                align-items: center;
+        /*
+        -webkit-justify-content: flex-end;
+                justify-content: flex-end;
+        */
+        -webkit-flex-direction:column;
+                flex-direction:column;
+}
 
-video {
-     height: auto;
-     max-width: 100%;
- }
+.container > div{
+      /*height:100%;*/
+      /*width:100%;*/
+}
 
-
- canvas{
-     height: auto;
-     max-width: 100%;
-
- }
-
-
-
-/*
-
- @media only screen and (max-width: 768px) {
-      // Media Query ，也就是當寬度 < 768 px 時將載入下面這段 CSS :
-     //CSS的內容
+#video {
+   width: 640px;
+   height: 320px;
 
 }
 
+#canvas{
+   width: 440px;
+   height: 320px;
+     
+
+}
+
+/*
+@media only screen and (max-width: 768px) {
+  // Media Query ，也就是當寬度 < 768 px 時將載入下面這段 CSS :
+  //CSS的內容
+  #video {
+     height: 400px;
+     width: 300px;
+  }
+
+  #canvas{
+       height: 300px;
+       width: 300px;
+
+  }
+
+}
+*/
  @media only screen and (max-width: 480px) {
      // Media Query ，也就是當寬度 < 480 px 時將載入下面這段 CSS :
      //CSS的內容
+  #video {
+     width: 320px;
+     height: 160px;
+     
+  }
+
+  #canvas{
+       width: 220px;
+       height: 160px;
+  }
 }
 
- @media only screen and (max-width: 320px) {
+
+ @media only screen and (max-width: 340px) {
       // Media Query ，也就是當寬度 < 320 px 時將載入下面這段 CSS :
      //CSS的內容
 
+  #video {
+     width: 200px;
+     
+  }
+
+  #canvas{
+       width: 80%;
+       height: 240px;
+
+  }
+
 }
 
 
-*/
+
 
 
 

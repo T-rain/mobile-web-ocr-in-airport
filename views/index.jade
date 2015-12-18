@@ -5,12 +5,30 @@ html.
       <title>OnBoard</title>
       <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
       <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <link rel="stylesheet" href="./stylesheets/style.css">  
     </head>
+
     <body>
-    <video id="video" autoplay></video>
-    <button id="snap">Take a picture</button>
-    <canvas id="canvas"></canvas>
-    <button id="ocr">OCR</button>
+
+    <div class="container">
+      <div>
+        <video id="video" autoplay></video>
+      </div>
+      <div>
+        <button id="snap">Take a picture</button>
+      </div>
+      <div>
+        <canvas id="canvas"></canvas>      
+      </div>
+      <div>
+        <button id="ocr">OCR</button>
+      </div>
+      <div>
+        <p></p>
+      </div>
+
+    </div>
+
     
     <script>
 
@@ -28,15 +46,10 @@ html.
           videoSetup = { "video": true };
 
 
-          canvas.width  = 1600;
-          canvas.height = 1200;
-          video.width  = 1600;
-          video.height = 1200;  
-          canvas.style.width  = '400px';
-          canvas.style.height = '300px';
-          video.style.width  = '400px';
-          video.style.height = '300px';
-
+          canvas.width  = 1024;
+          canvas.height = 768;
+          video.width  = 1024;
+          video.height = 768;  
           //Old method use
           var errBack = function(error) {
             console.log("Video capture error: ", error.code); 
@@ -70,7 +83,7 @@ html.
 
           document.getElementById("snap").addEventListener("click", function() {
             
-              context.drawImage(video, 0, 0, 1600, 1200);
+              context.drawImage(video, 0, 0, 1024, 768);
               var dataURI = canvas.toDataURL();
               $.ajax({
                 type: 'POST',
