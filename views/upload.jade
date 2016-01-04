@@ -1,0 +1,65 @@
+doctype html
+html.
+  <!DOCTYPE html>
+  <html lang="zh-tw">
+    <head>
+      <meta charset="UTF-8">
+      <title>upload</title>
+      <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <link rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css" />
+      <script src="./javascripts/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+
+    <body>  
+
+      <div data-role="page" id="index">
+
+      
+          <div data-role="header"  data-position="fixed">
+            <h1>OnBoard</h1>
+          </div><!-- /header -->
+          <div role="main" class="ui-content">
+            <img id= "img" style="padding:10% 10%; width: 80%;">
+            
+          </div>
+
+          <form action="/uploads" method="POST" enctype="multipart/form-data"  data-ajax="false">
+              
+              <p>請選擇相片</p>
+              <input id="uploadImage" name="file" type="file" style="padding:30px;" >
+              <br/>
+              <br/>
+              <input type="submit" value="上傳"> 
+
+          </form>
+          
+
+          <div data-role="footer" data-position="fixed">
+            <h4>copyright@OnBoard,2015</h4>
+          </div><!-- /footer -->
+
+
+      </div>
+
+
+    
+
+      <script>
+      $("#uploadImage").change(function(){
+        readImage( this );
+      });
+   
+      function readImage(input) {
+        if ( input.files && input.files[0] ) {
+          var FR= new FileReader();
+          FR.onload = function(e) {
+            //e.target.result = base64 format picture
+            $('#img').attr( "src", e.target.result );
+          };       
+          FR.readAsDataURL( input.files[0] );
+        }
+      }
+      </script>
+
+    </body>
+  </html>

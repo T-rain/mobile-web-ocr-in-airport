@@ -1,0 +1,148 @@
+doctype html
+html.
+    <head>
+      <meta charset="UTF-8">
+      <title>camera</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+      <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <link rel="stylesheet" href="./stylesheets/camera.css"> 
+      <link rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css" />
+      <script src="./javascripts/jquery.mobile-1.4.5.min.js"></script> 
+    </head>
+
+    <body>
+
+    <div data-role="page" id="camera">
+
+      
+      <div data-role="header"  data-position="fixed" data-fullscreen="true">
+        <h1>OnBoard-Camera</h1>
+      </div><!-- /header -->
+
+      <div style = "padding:10% auto;">
+        <video id="video" autoplay></video>
+        
+      </div>
+      <div>
+        <button id="snappicture">Take a picture</button>
+      </div>
+      <div style = "padding:10% auto;">
+        <canvas id="canvasimg"></canvas> 
+      </div>
+      
+      <!-- <div>
+        <button id="download">Download</button>
+      </div>
+      <div>
+        <button id="ocr">OCR</button>
+      </div>
+      -->
+      <div style = "padding:10%;">
+        <button id="uploads">UPLOAD</button>
+      </div>
+      
+
+      <div data-role="footer" data-position="fixed" data-fullscreen="true">
+        <h4>copyright@OnBoard,2015</h4>
+      </div><!-- /footer -->
+
+    </div>
+
+    
+    <script>
+
+          
+
+      window.addEventListener('DOMContentLoaded', function() {
+
+
+          
+          // Setup the Audio and Video
+
+          var canvasimg = document.getElementById("canvasimg"),
+          context = canvasimg.getContext("2d"),
+          video = document.getElementById("video"),
+          videoSetup = { "video": true };
+
+
+          canvasimg.width  = 1024;
+          canvasimg.height = 768;
+          video.width  = 1024;
+          video.height = 768;  
+          //Old method use
+          var errBack = function(error) {
+            console.log("Video capture error: ", error.code); 
+          };
+        
+          
+          // Old method,navigator.getUserMedia
+          if(navigator.getUserMedia) { // Standard
+            navigator.getUserMedia(videoSetup, function(stream) {
+              video.src = stream;
+              video.play();
+            }, errBack);
+          } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+            
+            navigator.webkitGetUserMedia(videoSetup, function(stream){
+              
+              video.src = window.URL.createObjectURL(stream);
+              video.play();
+            }, errBack);
+          }
+          else if(navigator.mozGetUserMedia) { // Firefox-prefixed
+            navigator.mozGetUserMedia(videoSetup, function(stream){
+              video.src = window.URL.createObjectURL(stream);
+              video.play();
+            }, errBack);
+          }
+
+          
+          
+          
+
+          document.getElementById("snappicture").addEventListener("click", function() {
+              context.drawImage(video, 0, 0, 1024, 768);
+              /*
+              var dataURI = canvas.toDataURL();
+
+              $.ajax({
+                type: 'POST',
+                url: "/",
+                data: {"dataURI":dataURI},
+                dataType: 'json',
+                
+                error: function(xhr) {
+                    console.log(xhr);
+                    alert('發生錯誤');
+                },
+                success: function(response) {
+                    console.log(response);
+                    alert('拍照成功');
+                }
+              });
+              */
+
+          });
+          /*
+          document.getElementById("ocr").addEventListener("click", function() {
+              
+              var r = confirm("Ocr??");
+              if (r === true) {
+                  alert("Strat,please wait");
+                
+              } else {
+                  alert("No Ocr");
+              }
+          });
+          */
+          document.getElementById("uploads").addEventListener("click", function() {
+              
+              window.location.href = "/uploads";
+  
+          });  
+
+      }, false);
+
+
+    </script>
+    </body>

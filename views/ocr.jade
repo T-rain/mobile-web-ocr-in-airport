@@ -1,20 +1,81 @@
-doctype html
-html.
-  <head>
-    
-
-  </head>
-  <body>
-    <a href="">Destination:XXX</a>
-    <a href="">Gate:XXX</a>
-    <a href="">Weather in XXX</a>
-  </body>
-<!--
+doctype
+html
   head
-    title= title
+    title choose
+    meta(name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0")
+    script(src="https://code.jquery.com/jquery-1.11.3.min.js")
+    link(rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css")
+    script(src="./javascripts/jquery.mobile-1.4.5.min.js")
+
+
+    meta(charset="utf-8")
+    script(src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js")
+    script(src="./javascripts/weather.js")
+    link(href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css")
+    link(rel="stylesheet" href="./stylesheets/weather.css")
+
   body
-    p
-    p
-    p
--->
+    div(data-role="page" id="choose")
+      div(data-role="header"  data-position="fixed")
+        h1 OnBoard
+
+      div(role="main" class="ui-content")
+        br
+        br
+        p(style="text-align:center") 你的地點是 <span id="country" style="font-size:20px; font-weight:bold; color:red"> #{country} </span> ,若這不是你的目的地,請再試一次
+        button(id="weather_button") 天氣
+        button(id="search") 相關消息
+        br
+        br
+        button(id="homepage_button") 回到首頁
+
+
+      div(data-role="footer"  data-position="fixed")
+        h4 copyright@OnBoard,2015
+
+
+
+    
+    div(data-role="page" id="weather_page")
+      div(data-role="header"  data-position="fixed")
+        h1 OnBoard
+
+      div(role="main" class="ui-content")
+        div(class="weather") #{country}
+        button(id="reverse_button") 回到選單
+
+
+      div(data-role="footer"  data-position="fixed")
+        h4 copyright@OnBoard,2015
+
+    script.
+
+          document.getElementById("weather_button").addEventListener("click", function() {
+              //取的country有空白
+              var country = $("#country").text().slice(1);
+              window.location.href = "#weather_page";
+  
+          });
+
+          $(document).ready(function() {
+              $(".weather").weatherFeed({
+                  relativeTimeZone: true
+              });
+          });
+
+          document.getElementById("search").addEventListener("click", function() {
+              var country = $("#country").text().slice(1); 
+              window.location.href = "/search?q="+country;
+  
+          });
+
+          document.getElementById("reverse_button").addEventListener("click", function() {
+              window.location.href = "#choose";
+          });
+
+          document.getElementById("homepage_button").addEventListener("click", function() {
+              window.location.href = "/";
+          });
+
+          
 

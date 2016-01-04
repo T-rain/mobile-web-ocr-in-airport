@@ -8,7 +8,11 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 //var users = require('./routes/users');
 var ocrs = require('./routes/ocrs');
+var camera = require('./routes/cameras');
 var uploads = require('./routes/uploads');
+//var weathers = require('./routes/weathers');
+var search = require('./routes/search');
+
 
 var app = express();
 
@@ -26,8 +30,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 //app.use('/users', users);
-app.use('/ocrs102',ocrs);
+app.use('/camera',camera);
 app.use('/uploads',uploads);
+app.use('/ocrs',ocrs);
+//app.use('/weathers',weathers);
+app.use('/search',search);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

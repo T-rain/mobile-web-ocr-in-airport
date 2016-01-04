@@ -3,17 +3,50 @@ var router = express.Router();
 var request = require('request');
 var fs = require('fs');
 
-router.get('/', function(req, res, next) {
+router.get('/',function(req,res,next){
+  
+      fs.readFile('./tmp/data.txt',"utf-8",function(err,data){
+          if(err){
+            //console.log(err);
+            res.json(err);
+          }else{
+            //console.log(data);
+            var ocr_result = data;
+
+            //console.log(ocr_result.indexOf('T0'));
+
+            var ocr_des = ocr_result.substring(ocr_result.indexOf('T0')+4,ocr_result.length);
+            ocr_des = ocr_des.substring(0,ocr_des.indexOf('/'));
+            var resultData = {"country":ocr_des};
+            res.render('ocr',resultData);
+          }
+
+      }); 
+
+
+
+
+});
+
+
+
+
+
+
+
+/*
+
+router.put('/', function(req, res, next) {
   
   var formData = {
     // Pass a simple key-value pair
-    apikey: 'ef63ff42fa383abe',
+    apikey: 'a0adbea53b98335a',
     
     // Pass data via Buffers
     //my_buffer: new Buffer([1, 2, 3]),
     // Pass data via Streams
 
-    file: fs.createReadStream('./tmp/tmp.png'),
+    file: fs.createReadStream('./tmp/uploadtmp.png'),
     // Pass multiple values /w an Array
     
     // attachments: [
@@ -41,7 +74,7 @@ router.get('/', function(req, res, next) {
       console.log(JSON.stringify(body));
       console.log(body);
       console.log(body.error);
-  */
+  
   //console.log('Upload successful!  Server responded with:', formData);
   //formData.txt = 'Upload successful!  Server responded with:';
   //res.json(formData);
@@ -88,7 +121,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-
+*/
 
 
 module.exports = router;

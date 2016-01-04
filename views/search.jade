@@ -1,0 +1,33 @@
+doctype
+html
+  head
+    title search
+    meta(name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0")
+    script(src="https://code.jquery.com/jquery-1.11.3.min.js")
+    link(rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css")
+    script(src="./javascripts/jquery.mobile-1.4.5.min.js")
+
+
+  body
+    div(data-role="page" id="search_page")
+      div(data-role="header"  data-position="fixed")
+        h1 OnBoard
+
+      div(role="main" class="ui-content")
+        p 搜尋結果:
+        br
+        ul(data-role="listview")
+          each result in results
+            li
+              a(href=result.link)=result.title
+        br
+        button(id="reverse_button") 回到選單
+
+      div(data-role="footer"  data-position="fixed")
+        h4 copyright@OnBoard,2015
+
+    script.
+      document.getElementById("reverse_button").addEventListener("click", function() {
+              window.location.href = "/ocrs";
+      });
+    

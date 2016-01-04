@@ -1,0 +1,36 @@
+doctype
+html
+  head
+    title weather
+    meta(name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0")
+    meta(charset="utf-8")
+    script(src="https://code.jquery.com/jquery-1.11.3.min.js")
+    script(src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js")
+    script(src="./javascripts/weather.js")
+    link(href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css")
+    link(rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css")
+    link(rel="stylesheet" href="./stylesheets/weather.css")
+    script(src="./javascripts/jquery.mobile-1.4.5.min.js")
+
+  body
+    div(data-role="page" id="index")
+      div(data-role="header"  data-position="fixed")
+        h1 OnBoard
+
+      div(role="main" class="ui-content")
+        div(class="weather") #{country}
+
+
+      div(data-role="footer"  data-position="fixed")
+        h4 copyright@OnBoard,2015
+
+    script.
+      $(document).ready(function() {
+        $(".weather").weatherFeed({
+            relativeTimeZone: true
+        });
+      });
+
+
+
+    

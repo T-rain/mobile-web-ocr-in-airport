@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+/*
 router.post('/',function(req, res, next){
 
     var base64Data = req.body.dataURI;
@@ -35,6 +36,6 @@ router.post('/',function(req, res, next){
     //res.json(data);
 
 });
-
+*/
 
 module.exports = router;
