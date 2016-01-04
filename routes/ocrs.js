@@ -4,7 +4,27 @@ var request = require('request');
 var fs = require('fs');
 
 router.get('/',function(req,res,next){
-  
+
+
+      
+      var ocrdata = { error: 0,
+                        result: 'FROM: HONG KONG/HKG\nT0: TAIPEI/TPE',
+                        filename: 'uploadtmp.png',
+                        language: 'eng',
+                        width: 257,
+                        height: 65 
+                      };
+       var ocr_result = ocrdata.result;
+
+       console.log(ocr_result.indexOf('T0'));
+
+       var ocr_des = ocr_result.substring(ocr_result.indexOf('T0')+4,ocr_result.length);
+       ocr_des = ocr_des.substring(0,ocr_des.indexOf('/'));
+       var resultData = {"country":ocr_des};
+       res.render('ocr',resultData);
+
+       
+       /*
       fs.readFile('./tmp/data.txt',"utf-8",function(err,data){
           if(err){
             //console.log(err);
@@ -22,7 +42,7 @@ router.get('/',function(req,res,next){
           }
 
       }); 
-
+    */
 
 
 
