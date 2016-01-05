@@ -3,11 +3,14 @@ html.
     <head>
       <meta charset="UTF-8">
       <title>camera</title>
-      <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
       <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
       <link rel="stylesheet" href="./stylesheets/camera.css"> 
       <link rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css" />
       <script src="./javascripts/jquery.mobile-1.4.5.min.js"></script> 
+
     </head>
 
     <body>
@@ -18,17 +21,20 @@ html.
       <div data-role="header"  data-position="fixed" data-fullscreen="true">
         <h1>OnBoard-Camera</h1>
       </div><!-- /header -->
-
-      <div style = "padding:10% auto;">
-        <video id="video" autoplay></video>
-        
-      </div>
+      <br/>
+      <br/>
+      <video id="videoimg" autoplay></video>
       <div>
         <button id="snappicture">Take a picture</button>
       </div>
-      <div style = "padding:10% auto;">
-        <canvas id="canvasimg"></canvas> 
+      <canvas id="canvasimg"></canvas> 
+      <div>
+         <button id="uploads">UPLOAD</button>
       </div>
+      <br/>
+      <br/>
+      <br/>
+
       
       <!-- <div>
         <button id="download">Download</button>
@@ -36,11 +42,7 @@ html.
       <div>
         <button id="ocr">OCR</button>
       </div>
-      -->
-      <div style = "padding:10%;">
-        <button id="uploads">UPLOAD</button>
-      </div>
-      
+      -->      
 
       <div data-role="footer" data-position="fixed" data-fullscreen="true">
         <h4>Copyright(c)OnBoard,2015</h4>
@@ -61,7 +63,7 @@ html.
 
           var canvasimg = document.getElementById("canvasimg"),
           context = canvasimg.getContext("2d"),
-          video = document.getElementById("video"),
+          video = document.getElementById("videoimg"),
           videoSetup = { "video": true };
 
 
