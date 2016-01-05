@@ -1,0 +1,35 @@
+doctype
+html
+  head
+    title ocrError
+    meta(name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0")
+    script(src="https://code.jquery.com/jquery-1.11.3.min.js")
+    link(rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css")
+    script(src="./javascripts/jquery.mobile-1.4.5.min.js")
+
+
+  body
+    div(data-role="page" id="search_page")
+      div(data-role="header"  data-position="fixed")
+        h1 OnBoard
+
+      div(role="main" class="ui-content")
+        
+        if word
+          p 我們沒有找到國家，我們找到了
+          p=word
+        else
+          p 網路不穩，上傳發生了問題
+        p 請再試一次
+        button(id="homepage_button") 回到首頁
+
+
+      div(data-role="footer"  data-position="fixed")
+        h4 Copyright(c)OnBoard,2015
+
+    script.
+          document.getElementById("homepage_button").addEventListener("click", function() {
+              window.location.href = "/";
+          });
+
+    

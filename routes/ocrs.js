@@ -5,46 +5,53 @@ var fs = require('fs');
 
 router.get('/',function(req,res,next){
 
-
-      
-      var ocrdata = { error: 0,
-                        result: 'FROM: HONG KONG/HKG\nT0: TAIPEI/TPE',
-                        filename: 'uploadtmp.png',
-                        language: 'eng',
-                        width: 257,
-                        height: 65 
-                      };
-       var ocr_result = ocrdata.result;
-
-       console.log(ocr_result.indexOf('T0'));
-
-       var ocr_des = ocr_result.substring(ocr_result.indexOf('T0')+4,ocr_result.length);
-       ocr_des = ocr_des.substring(0,ocr_des.indexOf('/'));
-       var resultData = {"country":ocr_des};
-       res.render('ocr',resultData);
-
        
-       /*
+      
       fs.readFile('./tmp/data.txt',"utf-8",function(err,data){
           if(err){
             //console.log(err);
             res.json(err);
           }else{
             //console.log(data);
+            var not_find_country = true;
+
             var ocr_result = data;
 
-            //console.log(ocr_result.indexOf('T0'));
+            
 
-            var ocr_des = ocr_result.substring(ocr_result.indexOf('T0')+4,ocr_result.length);
-            ocr_des = ocr_des.substring(0,ocr_des.indexOf('/'));
-            var resultData = {"country":ocr_des};
-            res.render('ocr',resultData);
+            var getError = function(){
+              var errorData = {"word": ocr_result};
+              res.status(404);
+              res.render('ocrError', errorData);
+            };
+
+            var getSuccess = function(){
+              var resultData = {"country":ocr_country};
+              res.status(200);
+              res.render('ocr',resultData);
+
+            };
+
+
+            console.log(ocr_result.indexOf('T0'));
+            if(ocr_result.indexOf('T0')!== -1){
+              //找到T0=>第一種機票的條件
+              var ocr_des = ocr_result.substring(ocr_result.indexOf('T0')+2,ocr_result.length);
+              //console.log(ocr_des);
+              var ocr_space = ocr_des.indexOf(' ');
+              var ocr_country = ocr_des.substring(ocr_space,ocr_des.indexOf('/'));
+              getSuccess();
+
+            }else{
+              getError();
+
+
+            }
+
+
           }
 
       }); 
-    */
-
-
 
 });
 

@@ -28,6 +28,11 @@ html.
         <button id="snappicture">Take a picture</button>
       </div>
       <canvas id="canvasimg"></canvas> 
+      
+      <div>
+         <button id="downloads">DOWNLOAD</button>
+      </div>
+      <br/>
       <div>
          <button id="uploads">UPLOAD</button>
       </div>
@@ -104,9 +109,8 @@ html.
 
           document.getElementById("snappicture").addEventListener("click", function() {
               context.drawImage(video, 0, 0, 1024, 768);
-              /*
-              var dataURI = canvas.toDataURL();
 
+              /*
               $.ajax({
                 type: 'POST',
                 url: "/",
@@ -137,6 +141,19 @@ html.
               }
           });
           */
+          function downloadURI(uri, name) {
+            var link = document.createElement("a");
+            link.download = name;
+            link.href = uri;
+            link.click();
+          }
+
+          document.getElementById("downloads").addEventListener("click", function() {
+              var dataURI = canvasimg.toDataURL();
+              
+              downloadURI(dataURI, "onboard.png");
+
+          }); 
           document.getElementById("uploads").addEventListener("click", function() {
               
               window.location.href = "/uploads";

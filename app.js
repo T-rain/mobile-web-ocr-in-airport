@@ -10,7 +10,7 @@ var routes = require('./routes/index');
 var ocrs = require('./routes/ocrs');
 var camera = require('./routes/cameras');
 var uploads = require('./routes/uploads');
-//var weathers = require('./routes/weathers');
+var weathers = require('./routes/weathers');
 var search = require('./routes/search');
 
 
@@ -33,7 +33,7 @@ app.use('/', routes);
 app.use('/camera',camera);
 app.use('/uploads',uploads);
 app.use('/ocrs',ocrs);
-//app.use('/weathers',weathers);
+app.use('/weathers',weathers);
 app.use('/search',search);
 
 

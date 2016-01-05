@@ -57,7 +57,7 @@ router.post('/', function(req, res, next) {
                                 console.log(ocrdata.error);
                                 if(ocrdata.error !== 0){
                                   console.log('Oops,cannot find word:', ocrdata);
-                                  res.render('updateOcrError', { title: 'OcrError' });
+                                  res.render('ocrError');
 
                                 }else{
                                   console.log('Upload successful!  Server responded with:', ocrdata);
