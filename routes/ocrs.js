@@ -17,7 +17,7 @@ router.get('/',function(req,res,next){
 
             var ocr_result = data;
 
-            
+            console.log(ocr_result.toString());
 
             var getError = function(){
               var errorData = {"word": ocr_result};
@@ -25,30 +25,46 @@ router.get('/',function(req,res,next){
               res.render('ocrError', errorData);
             };
 
-            var getSuccess = function(){
-              var resultData = {"country":ocr_country};
+            var getSuccess = function(gate){
+              var resultData = {"country":ocr_country,"gate":gate};
               res.status(200);
               res.render('ocr',resultData);
 
             };
 
 
-            console.log(ocr_result.indexOf('T0'));
             if(ocr_result.indexOf('T0')!== -1){
               //找到T0=>第一種機票的條件
               var ocr_des = ocr_result.substring(ocr_result.indexOf('T0')+2,ocr_result.length);
               //console.log(ocr_des);
               var ocr_space = ocr_des.indexOf(' ');
-              var ocr_country = ocr_des.substring(ocr_space,ocr_des.indexOf('/'));
-              getSuccess();
+              if(ocr_des.indexOf('/')!== -1){
+                var ocr_country = ocr_des.substring(ocr_space,ocr_des.indexOf('/'));
+                getSuccess("34");
+              }else{
+                var ocr_country = ocr_des.substring(ocr_space+1,ocr_des.length);
+                getSuccess("A8");
+              }
+              
 
+            }else if(ocr_result.indexOf('Io:')!== -1){
+                var ocr_des = ocr_result.substring(ocr_result.indexOf('Io:')+3,ocr_result.length);
+                console.log(ocr_des);
+                var ocr_country = ocr_des.substring(1,ocr_des.indexOf('/'));
+                getSuccess("34");
+
+            }else if(ocr_result.indexOf('TD')!== -1){
+                var ocr_des = ocr_result.substring(ocr_result.indexOf('TD')+2,ocr_result.length);
+                var ocr_space = ocr_des.indexOf(' ');
+                var ocr_country = ocr_des.substring(ocr_space+1,ocr_des.indexOf('\n'));
+                console.log(ocr_country);
+                console.log(ocr_country.length);
+                getSuccess("A8");
+                
             }else{
-              getError();
-
-
+                getError();
             }
-
-
+            
           }
 
       }); 

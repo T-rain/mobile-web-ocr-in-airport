@@ -9,6 +9,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
  
   var country = req.query.q;
+
+  //"https://www.googleapis.com/customsearch/v1?key=<span class="apiparam">AIzaSyDf017IJEoDpmn43808u_PrGqX6798oT-4</span>&amp;cx=017576662512468239146:omuauf_lfve&amp;q=address&amp;callback=hndlr">
+//https://www.googleapis.com/customsearch/v1?key=AIzaSyBroTaR4omJwO2LulOOBVROP5RpiuZQzMo&cx=004851261849501453188:0dnyghjxens&q='+ country
   request('https://www.googleapis.com/customsearch/v1?key=AIzaSyBroTaR4omJwO2LulOOBVROP5RpiuZQzMo&cx=004851261849501453188:0dnyghjxens&q='+ country , function (error, response, body) {
       if (!error && response.statusCode == 200) {
         console.log('success');

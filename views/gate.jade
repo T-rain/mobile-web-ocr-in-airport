@@ -1,0 +1,33 @@
+doctype
+html
+  head
+    title gate
+    meta(name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0")
+    script(src="https://code.jquery.com/jquery-1.11.3.min.js")
+    link(rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css")
+    script(src="./javascripts/jquery.mobile-1.4.5.min.js")
+
+
+  body
+    div(data-role="page" id="search_page" style="text-align:center")
+      div(data-role="header"  data-position="fixed")
+        h1 OnBoard
+
+      div(role="main" class="ui-content")
+        if notfound
+          p 並沒有相對應的國際桃園機場登機門資訊，請再試一次或確認機票所在機場位置
+        else
+          p 登機門指南:
+          p 您的登機門: #{gate}
+        br
+        img(src= "#{imgurl}" style="width:100%; max-width:500px; height:auto;")
+        button(id="reverse_button") 回到選單
+
+      div(data-role="footer"  data-position="fixed")
+        h4 Copyright(c)OnBoard,2015
+
+    script.
+      document.getElementById("reverse_button").addEventListener("click", function() {
+              window.location.href = "/ocrs";
+      });
+    

@@ -12,6 +12,8 @@ var camera = require('./routes/cameras');
 var uploads = require('./routes/uploads');
 var weathers = require('./routes/weathers');
 var search = require('./routes/search');
+var gates = require('./routes/gates');
+
 
 
 var app = express();
@@ -35,6 +37,7 @@ app.use('/uploads',uploads);
 app.use('/ocrs',ocrs);
 app.use('/weathers',weathers);
 app.use('/search',search);
+app.use('/gates',gates);
 
 
 
