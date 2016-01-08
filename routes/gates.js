@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
 
         var gateInfo = {
           "gate":gate,
-          "imgurl": "https://photos-3.dropbox.com/t/2/AAAi2xgzzU9iwXwXSkorouex7k_MbXZf9lmMJ_iE_jzm6Q/12/440375955/png/32x32/3/1452193200/0/2/maplogo.png/EKDwt8YDGCsgBygH/N9SYQjPH4tryq04yjAYZe0OtS7Zar5ig5LbaEqS4Mwo?size_mode=3&size=1024x768",
+          "imgurl": "http://i.imgur.com/ZNVXzwg.png",
           "notfound":1
         };
 
