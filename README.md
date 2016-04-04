@@ -12,6 +12,6 @@ weiting,lily
 
 1. thank for the jquery plugin [WeatherFeed](https://github.com/dhardin/WeatherFeed)
 
-1. I run this on https://onboard.eu-gb.mybluemix.net ,but I think it will suspend soon.
+1. I run this on https://onboard.eu-gb.mybluemix.net 
 
 1. Last,I need to do more for this,such as ocr,webcam.js,other paas.
