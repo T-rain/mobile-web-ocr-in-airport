@@ -17,10 +17,10 @@ router.post('/', function(req, res, next) {
     var form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
         // `file` is the name of the <input> field of type `file`
-        
+
         console.log(fields);
         console.log(files);
-        
+
         var old_path = files.file.path,
             file_size = files.file.size,
             file_ext = files.file.name.split('.').pop(),
@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
 
         console.log(process.env.PWD);
         console.log(new_path);
-        
+
         fs.readFile(old_path, function(err, data) {
             fs.writeFile(new_path, data, function(err) {
                 fs.unlink(old_path, function(err) {
@@ -39,15 +39,16 @@ router.post('/', function(req, res, next) {
                         res.status(500);
                         res.json({'success': false});
                     } else {
-                        
+
                         var formData = {
                             apikey: 'aecf578c753afcf8',
-    
+
                             file: fs.createReadStream('./tmp/uploadtmp.png'),
                         };
                         request.post({url:'http://www.bitocr.com/api', formData: formData}, function optionalCallback(err, httpResponse, body) {
                             if (err) {
-                              return console.error('upload failed:', err);
+                              console.log('upload failed:', err);
+                              res.render('ocrError');
                             }else{
                               try{
                                 var ocrdata = JSON.parse(body);
@@ -61,18 +62,18 @@ router.post('/', function(req, res, next) {
 
                                 }else{
                                   console.log('Upload successful!  Server responded with:', ocrdata);
-                                  
+
                                   //{ error: 0,
                                   //  result: 'FROM: HONG KONG/HKG\nT0: TAIPEI/TPE',
                                   //  filename: 'uploadtmp.png',
                                   //  language: 'eng',
                                   //  width: 257,
-                                  //  height: 65 
+                                  //  height: 65
                                   //}
                                   var writeStream = fs.createWriteStream('./tmp/data.txt');
                                   writeStream.write(ocrdata.result);
                                   writeStream.end(function () {
-                                   res.render('main',{}); 
+                                   res.render('main',{});
                                   });
                                   //fs.createWriteStream('./tmp/uploadtmp.png');
 
@@ -80,26 +81,28 @@ router.post('/', function(req, res, next) {
 
 
                               }catch(error){
-                                return console.error('upload failed error:', error);
-                              }          
+                                console.log('upload failed error:', error);
+
+                                res.render('ocrError');
+                              }
 
                             }
 
                         });
-                        
+
 
 
                     }
                 });
             });
          });
-        
-        
+
+
 
         //res.json(files);
-        
+
     });
-    
+
 
 });
 

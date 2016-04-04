@@ -14,14 +14,16 @@ html
         h1 OnBoard
 
       div(role="main" class="ui-content")
-        
+
         if word
           p 我們沒有找到國家，我們找到了
           p=word
         else
           p 上傳發生了問題
         p 請再試一次
+        button(id="main_button") 點我看範例
         button(id="homepage_button") 回到首頁
+
 
 
       div(data-role="footer"  data-position="fixed")
@@ -31,5 +33,6 @@ html
           document.getElementById("homepage_button").addEventListener("click", function() {
               window.location.href = "/";
           });
-
-    
+          document.getElementById("main_button").addEventListener("click", function() {
+              window.location.href = "/ocrs";
+          });
