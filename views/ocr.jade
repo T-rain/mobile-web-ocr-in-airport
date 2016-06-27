@@ -3,7 +3,7 @@ html
   head
     title choose
     meta(name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0")
-    script(src="https://code.jquery.com/jquery-1.11.3.min.js")
+    script(src="./javascripts/jquery-2.2.4.min.js")
     link(rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css")
     script(src="./javascripts/jquery.mobile-1.4.5.min.js")
 
@@ -27,9 +27,9 @@ html
 
       div(data-role="footer"  data-position="fixed")
         h4 Copyright(c)OnBoard,2015
-        
 
-        
+
+
 
     script.
 
@@ -37,13 +37,13 @@ html
               //取的country有空白
               var country = $("#country").text().slice(1);
               window.location.href = "/weathers?q="+country;
-  
+
           });
 
           document.getElementById("search").addEventListener("click", function() {
-              var country = $("#country").text().slice(1); 
+              var country = $("#country").text().slice(1);
               window.location.href = "/search?q="+country;
-  
+
           });
 
           document.getElementById("gate").addEventListener("click", function() {
@@ -58,6 +58,3 @@ html
           document.getElementById("homepage_button").addEventListener("click", function() {
               window.location.href = "/";
           });
-
-          
-

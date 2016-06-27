@@ -6,10 +6,10 @@ html.
       <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 
-      <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-      <link rel="stylesheet" href="./stylesheets/camera.css"> 
+      <script src="./javascripts/jquery-2.2.4.min.js"></script>
+      <link rel="stylesheet" href="./stylesheets/camera.css">
       <link rel="stylesheet" href="./stylesheets/jquery.mobile-1.4.5.min.css" />
-      <script src="./javascripts/jquery.mobile-1.4.5.min.js"></script> 
+      <script src="./javascripts/jquery.mobile-1.4.5.min.js"></script>
 
     </head>
 
@@ -17,7 +17,7 @@ html.
 
     <div data-role="page" id="camera">
 
-      
+
       <div data-role="header"  data-position="fixed" data-fullscreen="true">
         <h1>OnBoard</h1>
       </div><!-- /header -->
@@ -27,8 +27,8 @@ html.
       <div>
         <button id="snappicture">Take a picture</button>
       </div>
-      <canvas id="canvasimg"></canvas> 
-      
+      <canvas id="canvasimg"></canvas>
+
       <div>
          <button id="downloads">DOWNLOAD</button>
       </div>
@@ -40,14 +40,14 @@ html.
       <br/>
       <br/>
 
-      
+
       <!-- <div>
         <button id="download">Download</button>
       </div>
       <div>
         <button id="ocr">OCR</button>
       </div>
-      -->      
+      -->
 
       <div data-role="footer" data-position="fixed" data-fullscreen="true">
         <h4>Copyright(c)OnBoard,2015</h4>
@@ -55,15 +55,15 @@ html.
 
     </div>
 
-    
+
     <script>
 
-          
+
 
       window.addEventListener('DOMContentLoaded', function() {
 
 
-          
+
           // Setup the Audio and Video
 
           var canvasimg = document.getElementById("canvasimg"),
@@ -75,13 +75,13 @@ html.
           canvasimg.width  = 1024;
           canvasimg.height = 768;
           video.width  = 1024;
-          video.height = 768;  
+          video.height = 768;
           //Old method use
           var errBack = function(error) {
-            console.log("Video capture error: ", error.code); 
+            console.log("Video capture error: ", error.code);
           };
-        
-          
+
+
           // Old method,navigator.getUserMedia
           if(navigator.getUserMedia) { // Standard
             navigator.getUserMedia(videoSetup, function(stream) {
@@ -89,9 +89,9 @@ html.
               video.play();
             }, errBack);
           } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
-            
+
             navigator.webkitGetUserMedia(videoSetup, function(stream){
-              
+
               video.src = window.URL.createObjectURL(stream);
               video.play();
             }, errBack);
@@ -103,9 +103,9 @@ html.
             }, errBack);
           }
 
-          
-          
-          
+
+
+
 
           document.getElementById("snappicture").addEventListener("click", function() {
               context.drawImage(video, 0, 0, 1024, 768);
@@ -116,7 +116,7 @@ html.
                 url: "/",
                 data: {"dataURI":dataURI},
                 dataType: 'json',
-                
+
                 error: function(xhr) {
                     console.log(xhr);
                     alert('發生錯誤');
@@ -131,11 +131,11 @@ html.
           });
           /*
           document.getElementById("ocr").addEventListener("click", function() {
-              
+
               var r = confirm("Ocr??");
               if (r === true) {
                   alert("Strat,please wait");
-                
+
               } else {
                   alert("No Ocr");
               }
@@ -150,15 +150,15 @@ html.
 
           document.getElementById("downloads").addEventListener("click", function() {
               var dataURI = canvasimg.toDataURL();
-              
+
               downloadURI(dataURI, "onboard.png");
 
-          }); 
+          });
           document.getElementById("uploads").addEventListener("click", function() {
-              
+
               window.location.href = "/uploads";
-  
-          });  
+
+          });
 
       }, false);
 
